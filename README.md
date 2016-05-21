@@ -16,7 +16,7 @@ $ npm install --save-dev redis-lua2js
 
 ## Usage
 
-This module is not meant to be used on its own, but rather as part of another module, such as [gulp-redis-lua2js](https://github.com/perrin4869/gulp-redis-lua2js) or [hook-redis-lua](https://github.com/perrin4869/hook-redis-lua). In here, I will demonstrate the usage with the help of [require-from-string](https://github.com/floatdrop/require-from-string):
+This module is not meant to be used on its own, but rather as part of another module, such as [gulp-redis-lua2js](https://github.com/perrin4869/gulp-redis-lua2js) or [hook-redis-lua](https://github.com/perrin4869/node-hook-redis-lua). In here, I will demonstrate the usage with the help of [require-from-string](https://github.com/floatdrop/require-from-string):
 
 pdel.lua:
 ```lua
