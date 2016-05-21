@@ -21,8 +21,8 @@ This module is not meant to be used on its own, but rather as part of another mo
 pdel.lua:
 ```lua
 --!/usr/bin/env lua
--- name = pdel
--- nkeys = 1
+-- name pdel
+-- nkeys 1
 
 local function deleteKeys (keys)
   for i, name in ipairs(keys) do
