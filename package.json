@@ -1,0 +1,49 @@
+{
+  "name": "redis-lua2js",
+  "version": "0.1.0",
+  "description": "Convert a redis lua script into a simple node module",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "gulp test",
+    "build": "gulp build",
+    "cover": "babel-node node_modules/isparta/bin/isparta cover --report text --report html node_modules/mocha/bin/_mocha",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls && rm -rf ./coverage",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/perrin4869/redis-lua2js.git"
+  },
+  "keywords": [
+    "redis",
+    "lua",
+    "ioredis"
+  ],
+  "author": "Julian Grinblat <julian@dotcore.co.il>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/perrin4869/redis-lua2js/issues"
+  },
+  "homepage": "https://github.com/perrin4869/redis-lua2js#readme",
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-core": "^6.9.0",
+    "babel-preset-es2015-node4": "^2.1.0",
+    "babel-preset-es2015-node6": "^0.2.0",
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
+    "eslint": "^2.10.2",
+    "eslint-config-airbnb-base": "^3.0.1",
+    "eslint-plugin-import": "^1.8.0",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-eslint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-replace": "^0.5.4",
+    "gulp-util": "^3.0.7",
+    "isparta": "^4.0.0",
+    "mocha": "^2.4.5",
+    "require-from-string": "^1.2.0",
+    "sinon": "^1.17.4"
+  }
+}

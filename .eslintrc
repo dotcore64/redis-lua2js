@@ -1,0 +1,11 @@
+{
+  "extends": "airbnb-base",
+  "globals": {
+    "__NKEYS_PLACEHOLDER__": true,
+    "__NAME_PLACEHOLDER__": true
+  },
+  "rules": {
+    "quotes": [2, "single", { "allowTemplateLiterals": true }],
+    "no-shadow": 0
+  }
+}
