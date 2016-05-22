@@ -54,7 +54,7 @@ index.js:
 import Redis from 'ioredis';
 import fs from 'fs';
 import path from 'path';
-import lua2js from 'redis-lua2js';
+import { lua2js } from 'redis-lua2js';
 
 const ioredis = new Redis();
 const lua = fs.readFileSync(path.join(__dirname, 'pdel.lua'));
