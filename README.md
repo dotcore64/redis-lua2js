@@ -18,6 +18,26 @@ $ npm install --save-dev redis-lua2js
 
 This module is not meant to be used on its own, but rather as part of another module, such as [gulp-redis-lua2js](https://github.com/perrin4869/gulp-redis-lua2js) or [hook-redis-lua](https://github.com/perrin4869/node-hook-redis-lua). In here, I will demonstrate the usage with the help of [require-from-string](https://github.com/floatdrop/require-from-string):
 
+index.js:
+```js
+import Redis from 'ioredis';
+import fs from 'fs';
+import path from 'path';
+import lua2js from 'redis-lua2js';
+
+const ioredis = new Redis();
+const lua = fs.readFileSync(path.join(__dirname, 'pdel.lua'));
+const js = lua2js(lua); // This is a node module string, the template of which you can see in src/lua.js
+const pdel = requireFromString(js); // Parse the module as a string
+
+pdel.install(ioredis);
+ioredis.pdel('*');
+
+console.log(pdel.name); // pdel
+console.log(pdel.numberOfKeys); // 1
+console.log(pdel.lua); // the content of pdel.lua
+```
+
 pdel.lua:
 ```lua
 --!/usr/bin/env lua
@@ -47,26 +67,6 @@ else
   deleteKeys(keys)
   return #keys
 end
-```
-
-index.js:
-```js
-import Redis from 'ioredis';
-import fs from 'fs';
-import path from 'path';
-import { lua2js } from 'redis-lua2js';
-
-const ioredis = new Redis();
-const lua = fs.readFileSync(path.join(__dirname, 'pdel.lua'));
-const js = lua2js(lua); // This is a node module string, the template of which you can see in src/lua.js
-const pdel = requireFromString(js); // Parse the module as a string
-
-pdel.install(ioredis);
-ioredis.pdel('*');
-
-console.log(pdel.name); // pdel
-console.log(pdel.numberOfKeys); // 1
-console.log(pdel.lua); // the content of pdel.lua
 ```
 
 Note: supports Node 4+

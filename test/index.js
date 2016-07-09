@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import { expect } from 'chai';
 import requireFromString from 'require-from-string';
 
-import { lua2js } from '../lib';
+import lua2js from '../lib'; // cannot import from src because of lack of lua.js string embedding
 
 describe('redis-lua2js', () => {
   function testExpectation(test, expectation) {

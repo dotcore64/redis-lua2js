@@ -3,6 +3,7 @@ function getParamFromLua(lua, param) {
   return match && match[1];
 }
 
+// TODO: remove export in the future
 export function lua2js(lua, {
   name = getParamFromLua(lua, 'name'),
   numberOfKeys = getParamFromLua(lua, 'nkeys'),
@@ -14,3 +15,5 @@ export function lua2js(lua, {
     .replace('__NAME_PLACEHOLDER__', nameReplacement)
     .replace('__NKEYS_PLACEHOLDER__', numberOfKeys || null);
 }
+
+export default lua2js;
