@@ -1,12 +1,8 @@
 {
   "extends": "airbnb-base",
-  "globals": {
-    "__NKEYS_PLACEHOLDER__": true,
-    "__NAME_PLACEHOLDER__": true
-  },
+  "parser": "babel-eslint",
   "rules": {
     "quotes": [2, "single", { "allowTemplateLiterals": true }],
-    "no-shadow": 0,
     "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
   }
 }
