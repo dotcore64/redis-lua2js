@@ -1,7 +1,7 @@
-const { readFileSync } = require('fs');
 const { join } = require('path');
+const { readFileSync } = require('fs');
 const { expect } = require('chai');
-const requireFromString = require('require-from-string');
+const { requireFromString, importFromStringSync } = require('module-from-string');
 
 const lua2js = require('..');
 
@@ -41,6 +41,16 @@ describe('redis-lua2js', () => {
 
     expect(requireFromString(lua2js(lua))).to.deep.equal({
       name: null,
+      numberOfKeys: 1,
+      lua,
+    });
+  });
+
+  it('should generate esm module', () => {
+    const lua = readFileSync(join(__dirname, 'test_both.lua'), 'utf8');
+
+    expect(importFromStringSync(lua2js(lua, { type: 'module' }))).to.deep.equal({
+      name: 'pdel',
       numberOfKeys: 1,
       lua,
     });

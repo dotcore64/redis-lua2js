@@ -10,7 +10,7 @@ const getNumberOfKeys = (lua) => {
   }
 };
 
-const getExportExpression = (name, value) => ({
+const getCjsExportExpression = (name, value) => ({
   type: 'ExpressionStatement',
   expression: {
     type: 'AssignmentExpression',
@@ -40,14 +40,46 @@ const getExportExpression = (name, value) => ({
   },
 });
 
+const getEsmExportExpression = (name, value) => ({
+  type: 'ExpressionStatement',
+  expression: {
+    type: 'ExportNamedDeclaration',
+    declaration: {
+      type: 'VariableDeclaration',
+      declarations: [
+        {
+          type: 'VariableDeclarator',
+          id: {
+            type: 'Identifier',
+            name,
+          },
+          init: {
+            type: 'Literal',
+            value,
+          },
+        },
+      ],
+      kind: 'const',
+    },
+    specifiers: [],
+    source: null,
+  },
+});
+
 module.exports = (lua, {
   name = getName(lua),
   numberOfKeys = getNumberOfKeys(lua),
+  type = 'commonjs',
 } = {}) => generate({
   type: 'Program',
-  body: [
-    getExportExpression('lua', lua),
-    getExportExpression('name', name),
-    getExportExpression('numberOfKeys', numberOfKeys),
-  ],
+  body: type === 'commonjs' ? [ // eslint-disable-line no-nested-ternary
+    getCjsExportExpression('lua', lua),
+    getCjsExportExpression('name', name),
+    getCjsExportExpression('numberOfKeys', numberOfKeys),
+  ] : type === 'module' ? [
+    getEsmExportExpression('lua', lua),
+    getEsmExportExpression('name', name),
+    getEsmExportExpression('numberOfKeys', numberOfKeys),
+  ] : (() => { throw new Error('type must be commonjs | module'); })(),
+  ...(type === 'module' && { sourceType: 'module' }),
 });
