@@ -1,8 +1,0 @@
-{
-  "extends": "airbnb-base",
-  "parser": "babel-eslint",
-  "rules": {
-    "quotes": [2, "single", { "allowTemplateLiterals": true }],
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
-  }
-}

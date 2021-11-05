@@ -16,7 +16,7 @@ $ npm install --save-dev redis-lua2js
 
 ## Usage
 
-This module is not meant to be used on its own, but rather as part of another module, such as [gulp-redis-lua2js](https://github.com/dotcore64/gulp-redis-lua2js) or [hook-redis-lua](https://github.com/dotcore64/node-hook-redis-lua). In here, I will demonstrate the usage with the help of [require-from-string](https://github.com/floatdrop/require-from-string):
+This module is not meant to be used on its own, but rather as part of another module, such as [gulp-redis-lua2js](https://github.com/dotcore64/gulp-redis-lua2js) or [hook-redis-lua](https://github.com/dotcore64/node-hook-redis-lua). In here, I will demonstrate the usage with the help of [module-from-string](https://www.npmjs.com/package/module-from-string):
 
 index.js:
 ```js
@@ -24,6 +24,7 @@ import Redis from 'ioredis';
 import fs from 'fs';
 import path from 'path';
 import lua2js from 'redis-lua2js';
+import { requireFromString } from 'module-from-string';
 
 const ioredis = new Redis();
 const lua = fs.readFileSync(path.join(__dirname, 'pdel.lua'));
@@ -70,7 +71,7 @@ end
 
 ## API
 
-### lua2js(lua, { name, numberOfKeys })
+### lua2js(lua, { name, numberOfKeys, type = "commonjs" })
 
 Takes the contents of a lua script and outputs a node module, as a string, which can be used to load the script into a redis client such as `ioredis` easily.
 
@@ -94,6 +95,11 @@ By default it is parsed from the comments of the lua script, as demonstrated in 
 
 The number of keys that the redis command accepts
 
+#### type
+
+Type: `"commonjs" | "module"`
+
+Whether the output module is `commonjs` or `esm`.
 
 The parsed module will export the following:
 
@@ -113,8 +119,8 @@ Type: `string`, contains the contents of the lua script, useful for manually ins
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
-[build-badge]: https://img.shields.io/travis/dotcore64/redis-lua2js/master.svg?style=flat-square
-[build]: https://travis-ci.org/dotcore64/redis-lua2js
+[build-badge]: https://img.shields.io/github/workflow/status/dotcore64/redis-lua2js/test/master?style=flat-square
+[build]: https://github.com/dotcore64/redis-lua2js/actions
 
 [npm-badge]: https://img.shields.io/npm/v/redis-lua2js.svg?style=flat-square
 [npm]: https://www.npmjs.org/package/redis-lua2js

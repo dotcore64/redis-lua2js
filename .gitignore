@@ -1,6 +1,5 @@
 # Coverage directory used by tools like istanbul
 coverage
-.nyc_output
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
@@ -9,4 +8,6 @@ node_modules
 # Debug log from npm
 npm-debug.log
 
-lib/
+dist/
+
+.eslintcache

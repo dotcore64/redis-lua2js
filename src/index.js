@@ -1,4 +1,4 @@
-const { generate } = require('astring');
+import { generate } from 'astring';
 
 const getParamFromLua = (param) => (lua) => lua.match(`--\\s*${param}\\s+([^\\s$]+)`)?.[1] ?? null;
 const getName = getParamFromLua('name');
@@ -66,7 +66,7 @@ const getEsmExportExpression = (name, value) => ({
   },
 });
 
-module.exports = (lua, {
+export default (lua, {
   name = getName(lua),
   numberOfKeys = getNumberOfKeys(lua),
   type = 'commonjs',
