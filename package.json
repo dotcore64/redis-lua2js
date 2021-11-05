@@ -1,6 +1,6 @@
 {
   "name": "redis-lua2js",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Convert a redis lua script into a simple node module",
   "main": "dist/index.cjs",
   "type": "module",
