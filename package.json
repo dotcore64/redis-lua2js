@@ -40,7 +40,6 @@
   },
   "homepage": "https://github.com/dotcore64/redis-lua2js#readme",
   "devDependencies": {
-    "c8": "^7.10.0",
     "chai": "^4.3.4",
     "dirname-filename-esm": "^1.1.1",
     "eslint": "^8.7.0",
@@ -53,6 +52,7 @@
     "rollup": "^2.64.0"
   },
   "dependencies": {
-    "astring": "^1.8.1"
+    "astring": "^1.8.1",
+    "c8": "^7.11.0"
   }
 }
