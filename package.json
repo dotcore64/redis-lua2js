@@ -52,7 +52,7 @@
     "rollup": "^2.70.2"
   },
   "dependencies": {
-    "astring": "^1.8.1",
+    "astring": "^1.8.2",
     "c8": "^7.11.2"
   }
 }
