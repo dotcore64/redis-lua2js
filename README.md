@@ -3,8 +3,6 @@
 [![Build Status][build-badge]][build]
 [![npm package][npm-badge]][npm]
 [![Coverage Status][coveralls-badge]][coveralls]
-[![Dependency Status][dependency-status-badge]][dependency-status]
-[![devDependency Status][dev-dependency-status-badge]][dev-dependency-status]
 
 > convert redis lua scripts to a useful node module
 
@@ -20,14 +18,14 @@ This module is not meant to be used on its own, but rather as part of another mo
 
 index.js:
 ```js
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import Redis from 'ioredis';
-import fs from 'fs';
-import path from 'path';
 import lua2js from 'redis-lua2js';
 import { requireFromString } from 'module-from-string';
 
 const ioredis = new Redis();
-const lua = fs.readFileSync(path.join(__dirname, 'pdel.lua'));
+const lua = readFileSync(join(__dirname, 'pdel.lua'));
 const js = lua2js(lua); // This is a node module string, the template of which you can see in src/lua.js
 const pdel = requireFromString(js); // Parse the module as a string
 
@@ -127,9 +125,3 @@ See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
 [coveralls-badge]: https://img.shields.io/coveralls/dotcore64/redis-lua2js/master.svg?style=flat-square
 [coveralls]: https://coveralls.io/r/dotcore64/redis-lua2js
-
-[dependency-status-badge]: https://david-dm.org/dotcore64/redis-lua2js.svg?style=flat-square
-[dependency-status]: https://david-dm.org/dotcore64/redis-lua2js
-
-[dev-dependency-status-badge]: https://david-dm.org/dotcore64/redis-lua2js/dev-status.svg?style=flat-square
-[dev-dependency-status]: https://david-dm.org/dotcore64/redis-lua2js#info=devDependencies
