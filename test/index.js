@@ -1,6 +1,5 @@
 import { join } from 'path';
 import { readFileSync } from 'fs';
-import { createRequire } from 'module';
 import { expect } from 'chai';
 import { requireFromString, importFromStringSync } from 'module-from-string';
 import { dirname } from 'dirname-filename-esm';
@@ -58,10 +57,5 @@ describe('redis-lua2js', () => {
       numberOfKeys: 1,
       lua,
     });
-  });
-
-  it('should require cjs module', () => {
-    const require = createRequire(import.meta.url);
-    expect(require('..')).to.be.a('function');
   });
 });
