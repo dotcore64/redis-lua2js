@@ -1,11 +1,11 @@
-import { join } from 'path';
-import { readFileSync } from 'fs';
+import { join } from 'node:path';
+import { readFileSync } from 'node:fs';
 import { expect } from 'chai';
 import { requireFromString, importFromStringSync } from 'module-from-string';
 import { dirname } from 'dirname-filename-esm';
 
 // https://github.com/import-js/eslint-plugin-import/issues/1649
-// eslint-disable-next-line import/no-unresolved,node/no-missing-import
+// eslint-disable-next-line import/no-unresolved,n/no-extraneous-import
 import lua2js from 'redis-lua2js';
 
 describe('redis-lua2js', () => {

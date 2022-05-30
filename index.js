@@ -4,8 +4,8 @@ const getParamFromLua = (param) => (lua) => lua.match(`--\\s*${param}\\s+([^\\s$
 const getName = getParamFromLua('name');
 const getNumberOfKeys = (lua) => {
   try {
-    return parseInt(getParamFromLua('nkeys')(lua), 10);
-  } catch (e) {
+    return Number.parseInt(getParamFromLua('nkeys')(lua), 10);
+  } catch {
     return null;
   }
 };
@@ -76,10 +76,10 @@ export default (lua, {
     getCjsExportExpression('lua', lua),
     getCjsExportExpression('name', name),
     getCjsExportExpression('numberOfKeys', numberOfKeys),
-  ] : type === 'module' ? [
+  ] : (type === 'module' ? [
     getEsmExportExpression('lua', lua),
     getEsmExportExpression('name', name),
     getEsmExportExpression('numberOfKeys', numberOfKeys),
-  ] : (() => { throw new Error('type must be commonjs | module'); })(),
+  ] : (() => { throw new Error('type must be commonjs | module'); })()),
   ...(type === 'module' && { sourceType: 'module' }),
 });
