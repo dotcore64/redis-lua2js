@@ -72,7 +72,7 @@ export default (lua, {
   type = 'commonjs',
 } = {}) => generate({
   type: 'Program',
-  body: type === 'commonjs' ? [ // eslint-disable-line no-nested-ternary
+  body: type === 'commonjs' ? [
     getCjsExportExpression('lua', lua),
     getCjsExportExpression('name', name),
     getCjsExportExpression('numberOfKeys', numberOfKeys),
