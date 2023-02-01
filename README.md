@@ -117,7 +117,7 @@ Type: `string`, contains the contents of the lua script, useful for manually ins
 
 See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
 
-[build-badge]: https://img.shields.io/github/workflow/status/dotcore64/redis-lua2js/test/master?style=flat-square
+[build-badge]: https://img.shields.io/github/actions/workflow/status/dotcore64/redis-lua2js/test.yml?event=push&style=flat-square
 [build]: https://github.com/dotcore64/redis-lua2js/actions
 
 [npm-badge]: https://img.shields.io/npm/v/redis-lua2js.svg?style=flat-square
