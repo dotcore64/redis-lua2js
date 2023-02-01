@@ -5,7 +5,7 @@ import { requireFromString, importFromStringSync } from 'module-from-string';
 import { dirname } from 'dirname-filename-esm';
 
 // https://github.com/import-js/eslint-plugin-import/issues/1649
-// eslint-disable-next-line import/no-unresolved,n/no-extraneous-import
+// eslint-disable-next-line import/no-unresolved
 import lua2js from 'redis-lua2js';
 
 describe('redis-lua2js', () => {
