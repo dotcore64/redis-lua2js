@@ -47,7 +47,7 @@
     "module-from-string": "^3.3.0"
   },
   "dependencies": {
-    "astring": "^1.8.4",
+    "astring": "^1.8.6",
     "c8": "^7.14.0"
   }
 }
