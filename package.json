@@ -4,7 +4,7 @@
   "description": "Convert a redis lua script into a simple node module",
   "type": "module",
   "engines": {
-    "node": ">=20.0"
+    "node": "^20.13.0 || >=22.0.0"
   },
   "exports": {
     ".": "./index.js",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "lint": "eslint --cache .",
-    "test": "mocha",
+    "test": "node --test --import ./test/setup.js ./test/index.js",
     "cover": "c8 npm test"
   },
   "files": [
@@ -44,7 +44,6 @@
     "eslint-plugin-n": "^18.2.2",
     "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-unicorn": "^65.0.1",
-    "mocha": "^11.7.6",
     "module-from-string": "^3.3.1",
     "prettier": "3.9.5"
   },
