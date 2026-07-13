@@ -1,6 +1,6 @@
 import { generate } from 'astring';
 
-const getParamFromLua = (param) => (lua) => lua.match(`--\\s*${param}\\s+([^\\s$]+)`)?.[1] ?? null;
+const getParamFromLua = (param) => (lua) => lua.match(String.raw`--\s*${param}\s+([^\s$]+)`)?.[1] ?? null;
 const getName = getParamFromLua('name');
 const getNumberOfKeys = (lua) => {
   try {
