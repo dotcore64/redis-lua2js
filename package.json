@@ -37,7 +37,6 @@
     "@eslint-community/eslint-plugin-eslint-comments": "^4.7.2",
     "@eslint/js": "^9.39.5",
     "chai": "^6.2.2",
-    "dirname-filename-esm": "^1.1.2",
     "eslint": "^9.39.5",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",

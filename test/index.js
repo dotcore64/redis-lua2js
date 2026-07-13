@@ -2,7 +2,6 @@ import { join } from "node:path";
 import { readFileSync } from "node:fs";
 import { expect } from "chai";
 import { requireFromString, importFromStringSync } from "module-from-string";
-import { dirname } from "dirname-filename-esm";
 
 // https://github.com/import-js/eslint-plugin-import/issues/1649
 // eslint-disable-next-line import/no-unresolved
@@ -11,7 +10,8 @@ import lua2js from "redis-lua2js";
 describe("redis-lua2js", () => {
   it("should export name and numberOfKeys from lua", () => {
     const lua = readFileSync(
-      join(dirname(import.meta), "test_both.lua"),
+      // eslint-disable-next-line n/no-unsupported-features/node-builtins
+      join(import.meta.dirname, "test_both.lua"),
       "utf8",
     );
 
@@ -24,7 +24,8 @@ describe("redis-lua2js", () => {
 
   it("should return null name and numeberOfKeys", () => {
     const lua = readFileSync(
-      join(dirname(import.meta), "test_none.lua"),
+      // eslint-disable-next-line n/no-unsupported-features/node-builtins
+      join(import.meta.dirname, "test_none.lua"),
       "utf8",
     );
 
@@ -37,7 +38,8 @@ describe("redis-lua2js", () => {
 
   it("should export name from lua and null numberOfKeys", () => {
     const lua = readFileSync(
-      join(dirname(import.meta), "test_name.lua"),
+      // eslint-disable-next-line n/no-unsupported-features/node-builtins
+      join(import.meta.dirname, "test_name.lua"),
       "utf8",
     );
 
@@ -50,7 +52,8 @@ describe("redis-lua2js", () => {
 
   it("should export null name and numberOfKeys from lua", () => {
     const lua = readFileSync(
-      join(dirname(import.meta), "test_nkeys.lua"),
+      // eslint-disable-next-line n/no-unsupported-features/node-builtins
+      join(import.meta.dirname, "test_nkeys.lua"),
       "utf8",
     );
 
@@ -63,7 +66,8 @@ describe("redis-lua2js", () => {
 
   it("should generate esm module", () => {
     const lua = readFileSync(
-      join(dirname(import.meta), "test_both.lua"),
+      // eslint-disable-next-line n/no-unsupported-features/node-builtins
+      join(import.meta.dirname, "test_both.lua"),
       "utf8",
     );
 
