@@ -1,85 +1,97 @@
-import { generate } from 'astring';
+import { generate } from "astring";
 
-const getParamFromLua = (param) => (lua) => lua.match(String.raw`--\s*${param}\s+([^\s$]+)`)?.[1] ?? null;
-const getName = getParamFromLua('name');
+const getParamFromLua = (param) => (lua) =>
+  lua.match(String.raw`--\s*${param}\s+([^\s$]+)`)?.[1] ?? null;
+const getName = getParamFromLua("name");
 const getNumberOfKeys = (lua) => {
   try {
-    return Number.parseInt(getParamFromLua('nkeys')(lua), 10);
+    return Number.parseInt(getParamFromLua("nkeys")(lua), 10);
   } catch {
     return null;
   }
 };
 
 const getCjsExportExpression = (name, value) => ({
-  type: 'ExpressionStatement',
+  type: "ExpressionStatement",
   expression: {
-    type: 'AssignmentExpression',
-    operator: '=',
+    type: "AssignmentExpression",
+    operator: "=",
     left: {
-      type: 'MemberExpression',
+      type: "MemberExpression",
       object: {
-        type: 'MemberExpression',
+        type: "MemberExpression",
         object: {
-          type: 'Identifier',
-          name: 'module',
+          type: "Identifier",
+          name: "module",
         },
         property: {
-          type: 'Identifier',
-          name: 'exports',
+          type: "Identifier",
+          name: "exports",
         },
       },
       property: {
-        type: 'Identifier',
+        type: "Identifier",
         name,
       },
     },
     right: {
-      type: 'Literal',
+      type: "Literal",
       value,
     },
   },
 });
 
 const getEsmExportExpression = (name, value) => ({
-  type: 'ExpressionStatement',
+  type: "ExpressionStatement",
   expression: {
-    type: 'ExportNamedDeclaration',
+    type: "ExportNamedDeclaration",
     declaration: {
-      type: 'VariableDeclaration',
+      type: "VariableDeclaration",
       declarations: [
         {
-          type: 'VariableDeclarator',
+          type: "VariableDeclarator",
           id: {
-            type: 'Identifier',
+            type: "Identifier",
             name,
           },
           init: {
-            type: 'Literal',
+            type: "Literal",
             value,
           },
         },
       ],
-      kind: 'const',
+      kind: "const",
     },
     specifiers: [],
     source: null,
   },
 });
 
-export default (lua, {
-  name = getName(lua),
-  numberOfKeys = getNumberOfKeys(lua),
-  type = 'commonjs',
-} = {}) => generate({
-  type: 'Program',
-  body: type === 'commonjs' ? [
-    getCjsExportExpression('lua', lua),
-    getCjsExportExpression('name', name),
-    getCjsExportExpression('numberOfKeys', numberOfKeys),
-  ] : (type === 'module' ? [
-    getEsmExportExpression('lua', lua),
-    getEsmExportExpression('name', name),
-    getEsmExportExpression('numberOfKeys', numberOfKeys),
-  ] : (() => { throw new Error('type must be commonjs | module'); })()),
-  ...(type === 'module' && { sourceType: 'module' }),
-});
+export default (
+  lua,
+  {
+    name = getName(lua),
+    numberOfKeys = getNumberOfKeys(lua),
+    type = "commonjs",
+  } = {},
+) =>
+  generate({
+    type: "Program",
+    body:
+      type === "commonjs"
+        ? [
+            getCjsExportExpression("lua", lua),
+            getCjsExportExpression("name", name),
+            getCjsExportExpression("numberOfKeys", numberOfKeys),
+          ]
+        : type === "module"
+          ? [
+              getEsmExportExpression("lua", lua),
+              getEsmExportExpression("name", name),
+              getEsmExportExpression("numberOfKeys", numberOfKeys),
+            ]
+          : (() => {
+              throw new Error("type must be commonjs | module");
+            })(),
+    ...(type === "module" && { sourceType: "module" }),
+  });

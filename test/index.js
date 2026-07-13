@@ -1,26 +1,32 @@
-import { join } from 'node:path';
-import { readFileSync } from 'node:fs';
-import { expect } from 'chai';
-import { requireFromString, importFromStringSync } from 'module-from-string';
-import { dirname } from 'dirname-filename-esm';
+import { join } from "node:path";
+import { readFileSync } from "node:fs";
+import { expect } from "chai";
+import { requireFromString, importFromStringSync } from "module-from-string";
+import { dirname } from "dirname-filename-esm";
 
 // https://github.com/import-js/eslint-plugin-import/issues/1649
 // eslint-disable-next-line import/no-unresolved
-import lua2js from 'redis-lua2js';
+import lua2js from "redis-lua2js";
 
-describe('redis-lua2js', () => {
-  it('should export name and numberOfKeys from lua', () => {
-    const lua = readFileSync(join(dirname(import.meta), 'test_both.lua'), 'utf8');
+describe("redis-lua2js", () => {
+  it("should export name and numberOfKeys from lua", () => {
+    const lua = readFileSync(
+      join(dirname(import.meta), "test_both.lua"),
+      "utf8",
+    );
 
     expect(requireFromString(lua2js(lua))).to.deep.equal({
-      name: 'pdel',
+      name: "pdel",
       numberOfKeys: 1,
       lua,
     });
   });
 
-  it('should return null name and numeberOfKeys', () => {
-    const lua = readFileSync(join(dirname(import.meta), 'test_none.lua'), 'utf8');
+  it("should return null name and numeberOfKeys", () => {
+    const lua = readFileSync(
+      join(dirname(import.meta), "test_none.lua"),
+      "utf8",
+    );
 
     expect(requireFromString(lua2js(lua))).to.deep.equal({
       name: null,
@@ -29,18 +35,24 @@ describe('redis-lua2js', () => {
     });
   });
 
-  it('should export name from lua and null numberOfKeys', () => {
-    const lua = readFileSync(join(dirname(import.meta), 'test_name.lua'), 'utf8');
+  it("should export name from lua and null numberOfKeys", () => {
+    const lua = readFileSync(
+      join(dirname(import.meta), "test_name.lua"),
+      "utf8",
+    );
 
     expect(requireFromString(lua2js(lua))).to.deep.equal({
-      name: 'pdel',
+      name: "pdel",
       numberOfKeys: null,
       lua,
     });
   });
 
-  it('should export null name and numberOfKeys from lua', () => {
-    const lua = readFileSync(join(dirname(import.meta), 'test_nkeys.lua'), 'utf8');
+  it("should export null name and numberOfKeys from lua", () => {
+    const lua = readFileSync(
+      join(dirname(import.meta), "test_nkeys.lua"),
+      "utf8",
+    );
 
     expect(requireFromString(lua2js(lua))).to.deep.equal({
       name: null,
@@ -49,13 +61,18 @@ describe('redis-lua2js', () => {
     });
   });
 
-  it('should generate esm module', () => {
-    const lua = readFileSync(join(dirname(import.meta), 'test_both.lua'), 'utf8');
+  it("should generate esm module", () => {
+    const lua = readFileSync(
+      join(dirname(import.meta), "test_both.lua"),
+      "utf8",
+    );
 
-    expect(importFromStringSync(lua2js(lua, { type: 'module' }))).to.deep.equal({
-      name: 'pdel',
-      numberOfKeys: 1,
-      lua,
-    });
+    expect(importFromStringSync(lua2js(lua, { type: "module" }))).to.deep.equal(
+      {
+        name: "pdel",
+        numberOfKeys: 1,
+        lua,
+      },
+    );
   });
 });
